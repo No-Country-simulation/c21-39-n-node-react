@@ -11,7 +11,11 @@ const Footer = () => {
   }, []);
 
 
+<<<<<<< HEAD
   console.log(data)
+=======
+  //console.log(data)
+>>>>>>> frontend-branch-duvan
 
 
 
