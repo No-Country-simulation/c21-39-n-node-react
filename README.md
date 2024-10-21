@@ -10,7 +10,7 @@ Descripción breve del proyecto, qué hace y su propósito.
 
 ## Características
 
-- Característica 1
+- Permite realizar un CRUD en una DB (MongoDB).
 - Característica 2
 - Característica 3
 - Característica 4
