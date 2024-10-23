@@ -34,9 +34,9 @@ class FoodController {
      // Método para agregar un producto de comida en la db
     async addFood(req, res) {
         try {
-            const { name, price, description, category, imageUrl, restaurantId } = req.query;
-            if (!name || !price || !restaurantId) {
-                return res.status(400).json({ message: 'Nombre, precio y restaurantId son requeridos.' });
+            const { name, price, description, category, imageUrl, restaurant } = req.body;
+            if (!name || !price ) {
+                return res.status(400).json({ message: 'Nombre y precio son requeridos.' }); // el restaurant se vincula automaticamente al user restaurant una vez registrado
             }
             const newFood = new Food({
                 name,
@@ -44,7 +44,7 @@ class FoodController {
                 description,
                 category,
                 imageUrl,
-                restaurant: restaurantId  // ID del restaurante es necesario pasarlo --> pense aca pasar esto con una funcion que recupere el id del cliente vendedor logeado pero es una idea
+                restaurant: restaurant  // ID del restaurante es necesario pasarlo --> pense aca pasar esto con una funcion que recupere el id del cliente vendedor logeado pero es una idea
             });
             const savedFood = await newFood.save();
             res.status(201).json(savedFood);

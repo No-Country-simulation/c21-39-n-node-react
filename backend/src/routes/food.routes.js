@@ -9,16 +9,12 @@ const router = express.Router();
 router.get("/", FoodController.allFoods);
 // Ruta para buscar productos de comida por categoría o nombre --> usa query pero no se si cambiarlo a params...AGREGO PROTECT Y authorizeRoles
 router.get(
-  "/search",
-  protect,
-  authorizeRoles("cliente"),
+  "/search", 
   FoodController.searchFood
 );
 // Ruta para agregar comida --> falta agregar un filtro paraque solo acceda un cliente que sea vendedor, para limitar la vista
 router.post(
   "/add",
-  protect,
-  authorizeRoles("restaurant"),
   FoodController.addFood
 );
 
