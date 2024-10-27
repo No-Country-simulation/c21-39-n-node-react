@@ -45,6 +45,17 @@ class CartController {
             res.status(500).json({ message: 'Error al actualizar la cantidad del producto', error: error.message });
         }
     }
+
+    //método para borrar un producto de un carrito
+    async deleteProductFromCart(req, res) {
+        const { cid, pid } = req.params;
+        try {
+            await cartService.removeProductFromCart(cid, pid);
+            res.status(200).json({ message: 'Producto eliminado del carrito' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error al eliminar el producto', error });
+        }
+    }
 }
 
 export default new CartController();

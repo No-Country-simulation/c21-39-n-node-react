@@ -54,6 +54,7 @@ npm install
 -----
 - **POST api/cart/add**: Agrega un plato al carrito
 - **PUT api/cart/update**: Permite actualizar la cantidad de los platos que estan en el carrito de un producto en especifico.
+- **DELETE api/cart/:cid/products/:pid/delete**: Elimina un plato del carrito
 
 ### Licencia
 
