@@ -50,6 +50,10 @@ npm install
 - **POST api/restaurants/search**: Busca un restaurant por nombre o categoria
 - **PUT api/restaurants/:id**: para editar el resto de un id especifico
 -----
+#### cart
+-----
+- **POST api/cart/add**: Agrega un plato al carrito
+- **PUT api/cart/update**: Permite actualizar la cantidad de los platos que estan en el carrito de un producto en especifico.
 
 ### Licencia
 

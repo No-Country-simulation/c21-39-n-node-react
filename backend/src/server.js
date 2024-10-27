@@ -7,6 +7,7 @@ import configObject from './config/config.js';
 import open from 'open';  // Importa el paquete open para abrir de una la pagina al iniciar
 import userRoutes from './routes/user.routes.js';
 import foodRoutes from './routes/food.routes.js';
+import cartRoutes from './routes/cart.routes';
 import restaurantRoutes from './routes/restaurant.routes.js';
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use('/api/users', userRoutes);
 app.use('/api/foods', foodRoutes);
 app.use('/api/restaurants', restaurantRoutes);
+app.use('/api/cart', cartRoutes);
 
 // Inicia el servidor y abre la página en el navegador
 app.listen(puerto, async () => {
