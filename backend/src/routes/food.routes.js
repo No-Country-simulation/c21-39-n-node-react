@@ -17,5 +17,7 @@ router.post(
   "/add",
   FoodController.addFood
 );
+// Ruta para actualizar los datos de un producto de un restaurante específico por id de resto y id de comida
+router.put('/restaurants/:restaurantId/foods/:foodId', FoodController.updateFood);
 
 export default router;

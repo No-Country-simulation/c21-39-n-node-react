@@ -53,6 +53,27 @@ class FoodController {
         }
     }
 
+    // Método para actualizar un producto de un restaurante específico
+    async updateFood(req, res) {
+        try {
+            const { restaurantId, foodId } = req.params;
+            const updatedData = req.body;
+            if (!mongoose.Types.ObjectId.isValid(restaurantId) || !mongoose.Types.ObjectId.isValid(foodId)) {
+                return res.status(400).json({ message: 'ID de restaurante o de comida inválido' });
+            }
+            const restaurant = await Restaurant.findOneAndUpdate(
+                { _id: restaurantId, "foods._id": foodId },  
+                { $set: { "foods.$": updatedData } },        
+                { new: true, runValidators: true }           
+            );
+            if (!restaurant) {
+                return res.status(404).json({ message: 'Restaurante o comida no encontrada' });
+            }
+            res.status(200).json(restaurant);
+        } catch (error) {
+            res.status(500).json({ message: 'Error al actualizar la comida: ' + error.message });
+        }
+    }
 
 }
 

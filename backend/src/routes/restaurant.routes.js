@@ -7,5 +7,7 @@ const router = express.Router();
 router.get('/', RestaurantController.allRestaurants);
 // ruta para filtrar los restaurant por nombre o categoria
 router.get('/search', RestaurantController.searchRestaurants);
+// ruta para editar o actualizar el restaurant
+router.put('/:id', RestaurantController.updateRestaurant);
 
 export default router;

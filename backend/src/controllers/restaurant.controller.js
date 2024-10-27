@@ -31,6 +31,32 @@ class RestaurantController {
         }
     }
 
+    // Método para actualizar un restaurante por ID
+    async updateRestaurant(req, res) {
+        try {
+            const { id } = req.params;
+            const updatedData = req.body;
+
+            // Verifica que el ID sea válido
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ message: 'ID inválido' });
+            }
+
+            const updatedRestaurant = await Restaurant.findByIdAndUpdate(id, updatedData, {
+                new: true,
+                runValidators: true,
+            });
+
+            if (!updatedRestaurant) {
+                return res.status(404).json({ message: 'Restaurante no encontrado' });
+            }
+
+            res.status(200).json(updatedRestaurant);
+        } catch (error) {
+            res.status(500).json({ message: 'Error al actualizar el restaurante: ' + error.message });
+        }
+    }
+
 }
 
 export default new RestaurantController();
