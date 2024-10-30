@@ -9,6 +9,7 @@ import userRoutes from './routes/user.routes.js';
 import foodRoutes from './routes/food.routes.js';
 import cartRoutes from './routes/cart.routes';
 import restaurantRoutes from './routes/restaurant.routes.js';
+import {MercadoPagoConfig, Preference} from "mercadopago";
 
 const app = express();
 const { mongo_url, puerto } = configObject;
@@ -26,6 +27,38 @@ app.use('/api/users', userRoutes);
 app.use('/api/foods', foodRoutes);
 app.use('/api/restaurants', restaurantRoutes);
 app.use('/api/cart', cartRoutes);
+
+//Para mercado pago // falta configuracion - con mp.
+app.post("/create-preference", async (req, res) =>{
+    try {
+        const body ={
+            items: [
+                {
+                    title: req.body.title,
+                    quantity: Number(req.body.quantity),
+                    unit_price: Number(req.body.price),
+                    currency_id: "ARS"
+                }
+            ],
+            back_urls: {
+                success: "http://www.mercadolibre.com.ar/",
+                failure: "http://www.mercadolibre.com.ar/",
+                pending: "http://www.mercadolibre.com.ar/"
+            },
+            auto_return: "approved",
+        };
+        const preference = new Preference(client);
+        const result = await preference.create({body});
+        res.json(
+            {
+                id: result.id
+            }
+        )
+    } catch (error) {
+        console.log(error)
+        res.send("error");
+    }
+})
 
 // Inicia el servidor y abre la página en el navegador
 app.listen(puerto, async () => {
